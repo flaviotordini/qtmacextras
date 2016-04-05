@@ -98,8 +98,10 @@ QString qt_strippedText(QString s)
 
 - (IBAction)itemClicked:(id)sender
 {
-    NSToolbarItem *item = reinterpret_cast<NSToolbarItem *>(sender);
-    toolbarPrivate->itemClicked(item);
+    if ([sender isKindOfClass:[NSToolbarItem class]]) {
+        NSToolbarItem *item = reinterpret_cast<NSToolbarItem *>(sender);
+        toolbarPrivate->itemClicked(item);
+    }
 }
 
 - (NSToolbarItem *) toolbar: (NSToolbar *)toolbar itemForItemIdentifier: (NSString *) itemIdentifier willBeInsertedIntoToolbar:(BOOL) willBeInserted
@@ -110,10 +112,17 @@ QString qt_strippedText(QString s)
     QMacToolBarItem *toolButton = reinterpret_cast<QMacToolBarItem *>(identifier.toULongLong()); // string -> unisgned long long -> pointer
     NSToolbarItem *toolbarItem = toolButton->nativeToolBarItem();
 
-    [toolbarItem setTarget:self];
-    [toolbarItem setAction:@selector(itemClicked:)];
+    if (![toolbarItem view]) {
+        [toolbarItem setTarget:self];
+        [toolbarItem setAction:@selector(itemClicked:)];
+    }
 
     return toolbarItem;
+}
+
+- (BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
+{
+    return [toolbarItem isEnabled];
 }
 
 @end

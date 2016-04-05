@@ -67,6 +67,7 @@ public:
     QMacToolBarItem *addAllowedItem(const QIcon &icon, const QString &text);
     QMacToolBarItem *addStandardItem(QMacToolBarItem::StandardItem standardItem);
     QMacToolBarItem *addAllowedStandardItem(QMacToolBarItem::StandardItem standardItem);
+    QMacToolBarItem *addView(NSView *view);
     void addSeparator();
 
     void setItems(QList<QMacToolBarItem *> &items);

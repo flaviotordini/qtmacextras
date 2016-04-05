@@ -84,6 +84,24 @@ QMacToolBarItem::~QMacToolBarItem()
 }
 
 /*!
+    \property QMacToolBarItem::enabled
+    \brief Whether the item is enabled
+
+    This property's default is true.
+*/
+bool QMacToolBarItem::enabled() const
+{
+    Q_D(const QMacToolBarItem);
+    return [d->toolbarItem enabled];
+}
+
+void QMacToolBarItem::setEnabled(bool enabled)
+{
+    Q_D(QMacToolBarItem);
+    [d->toolbarItem setEnabled:enabled];
+}
+
+/*!
     \property QMacToolBarItem::selectable
     \brief Whether the item is selecatble
 
@@ -99,6 +117,26 @@ void QMacToolBarItem::setSelectable(bool selectable)
 {
     Q_D(QMacToolBarItem);
     d->selectable = selectable;
+}
+
+/*!
+    \property QMacToolBarItem::view
+    \brief The item's view, if any.
+*/
+NSView *QMacToolBarItem::view() const
+{
+    Q_D(const QMacToolBarItem);
+    return [d->toolbarItem view];
+}
+
+void QMacToolBarItem::setView(NSView *view)
+{
+    Q_D(QMacToolBarItem);
+
+    if (d->standardItem != QMacToolBarItem::NoStandardItem)
+        return;
+
+    [d->toolbarItem setView:view];
 }
 
 /*!
@@ -163,14 +201,11 @@ void QMacToolBarItem::setIcon(const QIcon &icon)
 {
     Q_D(QMacToolBarItem);
     d->icon = icon;
-    QPixmap pixmap = icon.pixmap(64, 64);
 
     if (d->standardItem != QMacToolBarItem::NoStandardItem)
         return;
 
-    if (pixmap.isNull() == false) {
-        [d->toolbarItem setImage: QtMac::toNSImage(pixmap)];
-    }
+    [d->toolbarItem setImage: QtMac::iconToNSImage(icon)];
 }
 
 /*!

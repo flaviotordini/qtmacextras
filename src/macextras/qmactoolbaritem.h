@@ -47,6 +47,7 @@
 #include <QtMacExtras/qmacextrasglobal.h>
 
 Q_FORWARD_DECLARE_OBJC_CLASS(NSToolbarItem);
+Q_FORWARD_DECLARE_OBJC_CLASS(NSView);
 
 QT_BEGIN_NAMESPACE
 
@@ -71,6 +72,9 @@ public:
     QMacToolBarItem(QObject *parent = 0);
     virtual ~QMacToolBarItem();
 
+    bool enabled() const;
+    void setEnabled(bool enabled);
+
     bool selectable() const;
     void setSelectable(bool selectable);
 
@@ -82,6 +86,9 @@ public:
 
     QIcon icon() const;
     void setIcon(const QIcon &icon);
+
+    NSView *view() const;
+    void setView(NSView *view);
 
     NSToolbarItem *nativeToolBarItem() const;
 

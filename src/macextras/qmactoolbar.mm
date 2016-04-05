@@ -183,6 +183,16 @@ QMacToolBarItem *QMacToolBar::addAllowedStandardItem(QMacToolBarItem::StandardIt
     return item;
 }
 
+QMacToolBarItem *QMacToolBar::addView(NSView *view)
+{
+    Q_D(QMacToolBar);
+    QMacToolBarItem *item = new QMacToolBarItem(this);
+    item->setView(view);
+    d->items.append(item);
+    d->allowedItems.append(item);
+    return item;
+}
+
 /*!
     Sets the list of the default toolbar \a items.
 */
