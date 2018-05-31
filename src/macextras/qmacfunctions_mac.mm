@@ -79,18 +79,18 @@ NSImage* toNSImage(const QPixmap &pixmap)
 }
 
 /*!
-    \fn NSImage* QtMac::iconToNSImage(const QIcon &icon)
+    \fn NSImage* QtMac::iconToNSImage(const QIcon &icon, QIcon::Mode mode, QIcon::State state)
 
     Creates an \c NSImage equivalent to the QIcon \a icon. Returns the \c NSImage handle.
 
     It is the caller's responsibility to release the \c NSImage data
     after use.
 */
-NSImage* iconToNSImage(const QIcon &icon)
+NSImage* iconToNSImage(const QIcon &icon, QIcon::Mode mode, QIcon::State state)
 {
     NSImage *image = [[NSImage alloc] init];
     foreach (const QSize &size, icon.availableSizes()) {
-        QPixmap pixmap = icon.pixmap(size);
+        QPixmap pixmap = icon.pixmap(size, mode, state);
         CGImageRef cgimage = QtMac::toCGImageRef(pixmap);
         NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc] initWithCGImage:cgimage];
         [bitmapRep setSize: NSMakeSize(size.width(), size.height())];

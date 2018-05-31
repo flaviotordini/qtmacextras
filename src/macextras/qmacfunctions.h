@@ -79,7 +79,7 @@ Q_MACEXTRAS_EXPORT void setBadgeLabelText(const QString &text);
 Q_MACEXTRAS_EXPORT QString badgeLabelText();
 
 Q_MACEXTRAS_EXPORT NSImage *toNSImage(const QPixmap &pixmap);
-Q_MACEXTRAS_EXPORT NSImage *iconToNSImage(const QIcon &icon);
+Q_MACEXTRAS_EXPORT NSImage *iconToNSImage(const QIcon &icon, QIcon::Mode mode = QIcon::Normal, QIcon::State state = QIcon::Off);
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 Q_MACEXTRAS_EXPORT bool isMainWindow(QWindow *window);

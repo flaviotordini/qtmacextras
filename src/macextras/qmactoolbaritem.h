@@ -85,7 +85,7 @@ public:
     void setText(const QString &text);
 
     QIcon icon() const;
-    void setIcon(const QIcon &icon);
+    void setIcon(const QIcon &icon, QIcon::State state = QIcon::Off);
 
     NSView *view() const;
     void setView(NSView *view);

@@ -197,7 +197,7 @@ QIcon QMacToolBarItem::icon() const
     return d->icon;
 }
 
-void QMacToolBarItem::setIcon(const QIcon &icon)
+void QMacToolBarItem::setIcon(const QIcon &icon, QIcon::State state)
 {
     Q_D(QMacToolBarItem);
     d->icon = icon;
@@ -205,7 +205,7 @@ void QMacToolBarItem::setIcon(const QIcon &icon)
     if (d->standardItem != QMacToolBarItem::NoStandardItem)
         return;
 
-    [d->toolbarItem setImage: QtMac::iconToNSImage(icon)];
+    [d->toolbarItem setImage: QtMac::iconToNSImage(icon, QIcon::Normal, state)];
 }
 
 /*!
