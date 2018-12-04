@@ -57,6 +57,7 @@ QT_BEGIN_NAMESPACE
 namespace QtMac
 {
 
+#if QT_DEPRECATED_SINCE(5, 12)
 /*!
     \fn NSImage* QtMac::toNSImage(const QPixmap &pixmap)
 
@@ -77,6 +78,7 @@ NSImage* toNSImage(const QPixmap &pixmap)
     CFRelease(cgimage);
     return image;
 }
+#endif
 
 /*!
     \fn NSImage* QtMac::iconToNSImage(const QIcon &icon, QIcon::Mode mode, QIcon::State state)
@@ -118,6 +120,7 @@ bool isMainWindow(QWindow *window)
 }
 #endif
 
+#if QT_DEPRECATED_SINCE(5, 12)
 CGContextRef currentCGContext()
 {
     return reinterpret_cast<CGContextRef>([[NSGraphicsContext currentContext] graphicsPort]);
@@ -148,6 +151,7 @@ QString badgeLabelText()
 {
     return QString::fromNSString([[[NSApplication sharedApplication] dockTile] badgeLabel]);
 }
+#endif
 
 } // namespace QtMac
 
